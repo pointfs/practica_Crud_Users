@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Pepito",
+      "email": "pepito@pepito.com"
+    },
+    {
+      "id": "2",
+      "name": "Laura",
+      "email": "laura@correo.com"
+    },
+    {
+      "id": "c087"
+    }
+  ]
+}

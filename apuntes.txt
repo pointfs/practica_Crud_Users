@@ -1,0 +1,332 @@
+https://www.youtube.com/watch?v=zBdojhZ2_Qg&list=PLUdlARNXMVkk7E88zOrphPyGdS50Tadlr
+
+https://www.youtube.com/watch?v=l2MihYAj0Iw
+
+
+https://www.youtube.com/watch?v=qFmwRriNJWs
+
+https://www.youtube.com/watch?v=RhxOTqFbI5Q&t=216s
+
+https://www.youtube.com/watch?v=2Xm9P_tXtK8
+
+
+https://www.youtube.com/watch?v=2Xm9P_tXtK8
+
+
+
+
+Para instalar json-server usando npm, puedes usar el comando npm install -g json-server en la terminal de Visual Studio Code. Aquí está el comando completo:
+
+npm install -g json-server
+
+Este comando instalará json-server globalmente en tu sistema. Si deseas instalarlo solo para tu proyecto actual, puedes omitir el flag -g.
+
+
+
+
+-----ERROR:npm ERR! code EACCES npm ERR! syscall rename npm ERR! path /usr/local/lib/node_modules/json-server npm ERR! dest /usr/local/lib/node_modules/.json-server-SmlbN4FS npm ERR! errno -13 npm ERR! Error: EACCES: permission denied, rename '/usr/local/lib/node_modules/json-server' -> '/usr/local/lib/node_modules/.json-server-SmlbN4FS' npm ERR! [Error: EACCES: permission denied, rename '/usr/local/lib/node_modules/json-server' -> '/usr/local/lib/node_modules/.json-server-SmlbN4FS'] { npm ERR! errno: -13, npm ERR! code: 'EACCES', npm ERR! syscall: 'rename', npm ERR! path: '/usr/local/lib/node_modules/json-server', npm ERR! dest: '/usr/local/lib/node_modules/.json-server-SmlbN4FS' npm ERR! } npm ERR! npm ERR! The operation was rejected by your operating system. npm ERR! It is likely you do not have the permissions to access this file as the current user npm ERR! npm ERR! If you believe this might be a permissions issue, please double-check the npm ERR! permissions of the file and its containing directories, or try running npm ERR! the command again as root/Administrator.
+
+npm ERR! A complete log of this run can be found in: /Users/fatimacosmesalvador/.npm/_logs/2024-01-25T09_36_20_653Z-debug-0.log-----
+
+
+El error que estás viendo se debe a un problema de permisos. Estás intentando instalar json-server globalmente, pero no tienes los permisos necesarios para escribir en el directorio global de node_modules.
+
+Una solución es utilizar sudo antes del comando npm install -g json-server, que te dará permisos de superusuario para la instalación. Sin embargo, usar sudo puede tener implicaciones de seguridad y no se recomienda para todos los casos.
+
+Aquí está el comando con sudo:
+
+sudo npm install -g json-server
+
+Otra solución es instalar json-server localmente en tu proyecto, en lugar de globalmente. Esto evitará el problema de permisos. Aquí está el comando para la instalación local:
+
+npm install json-server
+
+Por último, puedes considerar cambiar la configuración de npm para instalar paquetes globales en un directorio que no requiera permisos de superusuario. Aquí está un enlace a una guía sobre cómo hacer esto: Resolving EACCES permissions errors when installing packages globally.
+
+estás interesado en el directorio node_modules. Este directorio es donde npm instala todas las dependencias de tu proyecto. Cada paquete que instalas con npm install se coloca en este directorio.
+
+Si tienes problemas con tus módulos de Node, a veces puede ser útil eliminar el directorio node_modules y el archivo package-lock.json, y luego ejecutar npm install para reinstalar tus dependencias. Aquí están los comandos para hacer eso:
+
+
+
+------NODE-MODULES------
+
+Parece que estás interesado en el directorio node_modules. Este directorio es donde npm instala todas las dependencias de tu proyecto. Cada paquete que instalas con npm install se coloca en este directorio.
+
+Si tienes problemas con tus módulos de Node, a veces puede ser útil eliminar el directorio node_modules y el archivo package-lock.json, y luego ejecutar npm install para reinstalar tus dependencias. Aquí están los comandos para hacer eso:
+
+rm -rf node_modules
+rm package-lock.json
+npm install
+
+Estos comandos eliminarán el directorio node_modules y el archivo package-lock.json, y luego reinstalarán todas tus dependencias según lo especificado en tu archivo package.json.
+
+Por favor, ten en cuenta que debes tener cuidado al usar rm -rf, ya que eliminará permanentemente los archivos y directorios especificados.
+
+
+
+----¿Cómo puedo solucionar el error "EACCES: permission denied" al instalar paquetes de npm?---
+
+El error "EACCES: permission denied" generalmente ocurre cuando intentas instalar un paquete npm globalmente sin los permisos adecuados. Aquí te dejo algunas soluciones:
+
+1.-Usar sudo: Puedes usar el comando sudo antes de npm install -g para instalar el paquete como superusuario. Sin embargo, esto puede tener implicaciones de seguridad 
+y no se recomienda a menos que sea necesario.
+
+sudo npm install -g nombre_del_paquete
+
+2.-Cambiar el directorio de instalación global de npm: Puedes cambiar el directorio de instalación global de npm a un directorio en el que tengas permisos de escritura. Aquí te dejo cómo hacerlo:
+
+
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+
+Luego, añade ~/.npm-global/bin al PATH en tu archivo de perfil de shell (.bashrc, .bash_profile, .zshrc, etc.):
+
+
+----Intentando levantar sin tener los Scripts------
+
+Parece que estás intentando ejecutar scripts que no existen en tu archivo package.json. Para solucionar este problema, necesitas definir estos scripts en la sección de "scripts" de tu archivo package.json.
+
+
+Aquí tienes un ejemplo de cómo podrías hacerlo:
+
+{
+  "scripts": {
+    "dev": "comando_para_ejecutar_en_modo_de_desarrollo",
+    "api": "comando_para_iniciar_tu_api"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-alpha.22"
+  }
+}
+
+
+Por supuesto, tendrías que reemplazar "comando_para_ejecutar_en_modo_de_desarrollo" y "comando_para_iniciar_tu_api" con los comandos reales que deseas ejecutar.
+
+Si estás utilizando json-server, es posible que tus scripts se vean así:
+
+{
+  "scripts": {
+    "server": "json-server --watch db.json --port 3000"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-alpha.22"
+  }
+}
+
+Esto iniciará json-server en el puerto 3000, observando los cambios en el archivo db.json.
+
+
+El error getaddrinfo ENOTFOUND locaohost indica que el sistema no puede resolver el nombre de host "locaohost". Esto es probablemente debido a un error de escritura. El nombre de host correcto para la máquina local es "localhost".
+
+Por lo tanto, debes revisar tu código y asegurarte de que estás utilizando "localhost" en lugar de "locaohost". Por ejemplo, si estás intentando iniciar un servidor en el puerto 3000, la dirección correcta sería http://localhost:3000 y no http://locaohost:3000.
+
+
+---SERVIDOR------
+
+Para asegurarte de que tu servidor esté funcionando y escuchando en el puerto 8000, puedes seguir estos pasos:
+
+Verifica que tu script de inicio de servidor (por ejemplo, en tu archivo package.json si estás utilizando Node.js) esté configurado para escuchar en el puerto 8000. Por ejemplo:
+
+
+{
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+
+Y en tu archivo server.js:
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+
+
+-----Ejecuta tu servidor.--------
+
+Si estás utilizando Node.js, puedes hacerlo con el comando npm start o npm run start, dependiendo de cómo hayas configurado tu script.
+
+Verifica que tu servidor esté funcionando correctamente. Deberías ver un mensaje en la consola que dice "Server is running on http://localhost:8000".
+
+Si después de seguir estos pasos sigues teniendo problemas, podría haber un problema con tu código de servidor o con tu entorno de desarrollo. En ese caso, te recomendaría que busques ayuda adicional con el código específico o el entorno que estás utilizando.
+
+
+
+-----CRUD--------
+
+
+CRUD es un acrónimo que se utiliza en programación para referirse a las cuatro operaciones básicas que se pueden realizar en una base de datos persistente: Crear, Leer, Actualizar y Eliminar (en inglés: Create, Read, Update, Delete).
+
+Aquí tienes un ejemplo básico de cómo podrían verse estas operaciones en una aplicación de Node.js utilizando Express y MongoDB:
+
+
+const express = require('express');
+const router = express.Router();
+const Item = require('../models/Item');
+
+// Crear (Create)
+router.post('/', async (req, res) => {
+  const newItem = new Item(req.body);
+  const item = await newItem.save();
+  res.send(item);
+});
+
+// Leer (Read)
+router.get('/', async (req, res) => {
+  const items = await Item.find();
+  res.send(items);
+});
+
+// Actualizar (Update)
+router.put('/:id', async (req, res) => {
+  const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.send(updatedItem);
+});
+
+// Eliminar (Delete)
+router.delete('/:id', async (req, res) => {
+  const deletedItem = await Item.findByIdAndRemove(req.params.id);
+  res.send(deletedItem);
+});
+
+module.exports = router;
+
+En este ejemplo, estamos definiendo rutas para cada una de las operaciones CRUD en un modelo de datos Item. 
+Cada ruta maneja una solicitud HTTP diferente (POST para crear, GET para leer, PUT para actualizar, DELETE para eliminar) y utiliza métodos de Mongoose para interactuar con la base de datos.
+
+;
+
+
+-------BONUSSS-------
+
+-----¿Cómo puedo realizar operaciones CRUD en una base de datos utilizando Node.js y MongoDB?------
+
+Para realizar operaciones CRUD en una base de datos utilizando Node.js y MongoDB, puedes usar la biblioteca Mongoose, que proporciona una solución directa basada en esquemas para modelar los datos de tu aplicación. Aquí tienes un ejemplo básico de cómo podrían verse estas operaciones:
+
+Primero, necesitas instalar Mongoose y conectarlo a tu base de datos MongoDB:
+
+Luego, puedes definir un modelo para tus datos:
+
+Ahora puedes realizar operaciones CRUD en tu modelo Item:
+
+Crear (Create):
+
+Leer (Read):
+
+Actualizar (Update):
+
+Eliminar (Delete):
+
+En una aplicación real, probablemente querrás manejar errores y validar los datos antes de guardarlos en la base de datos.
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
+
+Luego, puedes definir un modelo para tus datos:
+
+const Schema = mongoose.Schema;
+
+const ItemSchema = new Schema({
+  name: String,
+  description: String,
+  // add more fields as needed
+});
+
+const Item = mongoose.model('Item', ItemSchema);
+
+Ahora puedes realizar operaciones CRUD en tu modelo Item:
+
+Crear (Create):
+
+const item = new Item({ name: 'Example Item', description: 'This is an example item.' });
+await item.save();
+
+Leer (Read):
+
+const items = await Item.find();
+
+Actualizar (Update):
+
+const updatedItem = await Item.findByIdAndUpdate(id, { name: 'Updated Item' }, { new: true });
+
+Eliminar (Delete):
+
+const deletedItem = await Item.findByIdAndRemove(id);
+
+
+
+
+-------FECTH API------
+
+La función fetch es una función incorporada en los navegadores modernos para hacer solicitudes HTTP. Es una alternativa a XMLHttpRequest y utiliza promesas, lo que facilita el manejo de las respuestas asíncronas.
+
+Aquí tienes un ejemplo básico de cómo usar fetch para hacer una solicitud GET a una API:
+
+fetch('https://api.example.com/data')
+  .then(response => response.json()) // parse the JSON from the response
+  .then(data => console.log(data)) // use the parsed data
+  .catch(error => console.error('Error:', error));
+Y aquí tienes un ejemplo de cómo usar fetch para hacer una solicitud POST:
+
+fetch('https://api.example.com/data', {
+  method: 'POST', // specify the method
+  headers: {
+    'Content-Type': 'application/json', // specify the request content type
+  },
+  body: JSON.stringify({ key: 'value' }), // send the request body
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
+
+Recuerda que fetch retorna una promesa que resuelve a la respuesta de la solicitud, no a los datos en sí. Para obtener los datos, necesitas llamar al método .json() en la respuesta, lo que también retorna una promesa.
+
+
+------MËTODO MAP-----
+
+El método map() en JavaScript se utiliza para crear un nuevo array con los resultados de la llamada a una función proporcionada en cada elemento del array original. Es un método inmutable, lo que significa que no cambia el array original.
+
+Aquí tienes un ejemplo básico de cómo usar map:
+
+const numbers = [1, 2, 3, 4, 5];
+const squares = numbers.map(number => number * number);
+console.log(squares); // [1, 4, 9, 16, 25]
+
+En este ejemplo, map está llamando a una función que toma un número y devuelve su cuadrado en cada elemento del array numbers. El resultado es un nuevo array squares que contiene los cuadrados de los números en el array original.
+
+Recuerda que la función que pasas a map recibe tres argumentos: el elemento actual, el índice del elemento actual y el array completo. La mayoría de las veces sólo necesitarás el primer argumento, pero los otros dos están disponibles si los necesitas.
+
+LA FUNCIÖN FECTH
+
+La función fetch es una función incorporada en los navegadores modernos para hacer solicitudes HTTP. Es una alternativa a XMLHttpRequest y utiliza promesas, lo que facilita el manejo de las respuestas asíncronas.
+
+Aquí tienes un ejemplo básico de cómo usar fetch para hacer una solicitud GET a una API:
+
+fetch('https://api.example.com/data')
+  .then(response => response.json()) // parse the JSON from the response
+  .then(data => console.log(data)) // use the parsed data
+  .catch(error => console.error('Error:', error));
+
+  Y aquí tienes un ejemplo de cómo usar fetch para hacer una solicitud POST:
+
+fetch('https://api.example.com/data', {
+  method: 'POST', // specify the method
+  headers: {
+    'Content-Type': 'application/json', // specify the request content type
+  },
+  body: JSON.stringify({ key: 'value' }), // send the request body
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
+1 VULNERABILIDAD:
+hardcoded-credentials Embedding credentials in source code risks unauthorized access
+
+Recuerda que fetch retorna una promesa que resuelve a la respuesta de la solicitud, no a los datos en sí. Para obtener los datos, necesitas llamar al método .json() en la respuesta, lo que también retorna una promesa.
